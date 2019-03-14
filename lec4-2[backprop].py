@@ -50,8 +50,8 @@ dy = (1) * dxpy
 # dsigx #
 dx += ((1 - sigx) * sigx) * dsigx
 # dnum #
-dx += (1) * dnum
-dsigy = (1) * dnum
+dx += 1 * dnum
+dsigy = 1 * dnum
 # dsigy #
 dy += ((1-sigy) * sigy) * dsigy
 
