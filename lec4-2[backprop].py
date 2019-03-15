@@ -44,8 +44,8 @@ dxpy_sq = 1 * ddenom
 # dxpy_sq / dxpy #
 dxpy = (2 * xpy) * dxpy_sq
 # dxpy / dx #
-dx = (1) * dxpy
-dy = (1) * dxpy
+dx = 1 * dxpy
+dy = 1 * dxpy
 
 # dsigx #
 dx += ((1 - sigx) * sigx) * dsigx
