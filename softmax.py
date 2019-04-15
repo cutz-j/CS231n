@@ -16,6 +16,8 @@ def softmax_loss_naive(W, X, y, reg):
   """
   # Initialize the loss and gradient to zero.
   loss = 0.0
+  X = X.T
+  W = W.T
   dW = np.zeros_like(W)
   #############################################################################
   # TODO: Compute the softmax loss and its gradient using explicit loops.     #
@@ -34,9 +36,9 @@ def softmax_loss_naive(W, X, y, reg):
       loss += -np.log(nom / denom)
       for j in range(num_classes):
           if j == y[i]:
-              dW[:, y[i]] += (np.exp(f[:, j]) / denom - 1) * X.T[:, [i]]
+              dW[:, [y[i]]] += (np.exp(f[:, j]) / denom - 1) * X[[i], :].T
           else:
-              dW[:, [j]] += (np.exp(f[:, j]) / denom) * X.T[:, [i]]
+              dW[:, [j]] += (np.exp(f[:, j]) / denom) * X[[i], :].T
   loss /= num_train
   loss += 0.5 * reg * np.sum(W * W)
   dW /= num_train
@@ -45,7 +47,7 @@ def softmax_loss_naive(W, X, y, reg):
   #                          END OF YOUR CODE                                 #
   #############################################################################
   
-  return loss, dW
+  return loss, dW.T
 
 
 def softmax_loss_vectorized(W, X, y, reg):
@@ -56,6 +58,8 @@ def softmax_loss_vectorized(W, X, y, reg):
   """
   # Initialize the loss and gradient to zero.
   loss = 0.0
+  X = X.T
+  W = W.T
   dW = np.zeros_like(W)
   m = X.shape[0]
 
@@ -67,6 +71,7 @@ def softmax_loss_vectorized(W, X, y, reg):
   # # regularization!                                                           #
   # #############################################################################
   classes = 10
+  
   
   y_one_hot = np.eye(classes)[y.reshape(-1)] # one-hot vector
   
@@ -87,4 +92,4 @@ def softmax_loss_vectorized(W, X, y, reg):
   #                          END OF YOUR CODE                                 #
   #############################################################################
 
-  return loss, dW
+  return loss, dW.T
