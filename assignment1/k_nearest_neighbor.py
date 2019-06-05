@@ -84,7 +84,7 @@ class KNearestNeighbor:
     num_test = X.shape[0]
     num_train = self.X_train.shape[0]
     dists = np.zeros((num_test, num_train))
-    for i in xrange(num_test):
+    for i in range(num_test):
       dists[i,:] = np.sum((self.X_train-X[i,:])**2,axis = 1)
     return dists
 
@@ -112,7 +112,7 @@ class KNearestNeighbor:
     F = np.sum(self.X_train**2,axis = 1).T
     F = np.tile(F,(500,5000))
     FT = X.dot(self.X_train.T)
-    print T.shape,F.shape,FT.shape,X.shape,self.X_train.shape
+    print (T.shape,F.shape,FT.shape,X.shape,self.X_train.shape)
     dists = T+F-2*FT
     
     #########################################################################
@@ -135,7 +135,7 @@ class KNearestNeighbor:
     """
     num_test = dists.shape[0]
     y_pred = np.zeros(num_test)
-    for i in xrange(num_test):
+    for i in range(num_test):
       # A list of length k storing the labels of the k nearest neighbors to
       # the ith test point.
       closest_y = self.y_train[np.argsort(dists[i,:])[:k]]
