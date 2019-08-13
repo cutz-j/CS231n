@@ -82,16 +82,12 @@ class TwoLayerNet(object):
         # of 0.5 to simplify the expression for the gradient.                      #
         #######################################################################
 
-        W1, b1, W2, b2 = self.params['W1'], self.params[
-            'b1'], self.params['W2'], self.params['b2']
+        W1, b1, W2, b2 = self.params['W1'], self.params['b1'], self.params['W2'], self.params['b2']
 
-        X = X.reshape(X.shape[0], self.D)
-        # Forward into first layer
-        hidden_layer, cache_hidden_layer = affine_relu_forward(X, W1, b1)
-        # Forward into second layer
-        scores, cache_scores = affine_forward(hidden_layer, W2, b2)
+        X = X.reshape(X.shape[0], self.D) # 2d
+        hidden_layer, cache_hidden_layer = affine_relu_forward(X, W1, b1) # relu
+        scores, cache_scores = affine_forward(hidden_layer, W2, b2) # linear
 
-        # If y is None then we are in test mode so just return scores
         if y is None:
             return scores
 
@@ -107,8 +103,7 @@ class TwoLayerNet(object):
         dW2 += self.reg * W2
 
         # Backprop into first layer
-        dx, dW1, db1 = affine_relu_backward(
-            dx1, cache_hidden_layer)
+        dx, dW1, db1 = affine_relu_backward(dx1, cache_hidden_layer)
         dW1 += self.reg * W1
 
         grads.update({'W1': dW1,
